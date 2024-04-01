@@ -1,0 +1,99 @@
+---
+title: "Description of Functions for Upcomming Package"
+output: html_document
+author: "Jordan Lee"
+date: "2024-04-01"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## TempConvert
+
+The TempConvert function allows users to select an input and output temperature unit, the current supported units are Farenheit, Celsius, and Kelvin. 
+The format for the function is TempConvert(select input unit("F","C", or"K"), select output unit("F","C", or"K"), temperature as integer)
+
+
+```{r}
+TempConvert = function(tempIn,tempOut,temp){
+  if (tempIn == "F"){
+    if (tempOut == "C"){
+      temp2 = (temp - 32)*5/9
+    }
+    else if (tempOut == "K"){
+      temp2 = ((temp - 32)*5/9) + 273.15
+    }
+  }
+  else if (tempIn == "C"){
+    if (tempOut == "K"){
+      temp2 = temp + 273.15
+    }
+    else if (tempOut == "F"){
+      temp2 = ((9/5)*temp)+32
+    }
+  }
+  else if (tempIn == "K"){
+    if (tempOut == "C"){
+      temp2 = temp - 273.15
+    }
+    else if (tempOut == "F"){
+      temp2 = ((temp - 273.15)*(9/5))+32
+    }
+  }
+  return(temp2)
+}
+
+```
+
+##Example
+```{r}
+TempConvert("F","C",212)
+TempConvert("K","C",0)
+```
+
+
+
+
+## VeloConvert
+
+The VeloConvert function allows users to select an input and output unit of velocity, the current supported units are miles per hour (mph), kilometers per hour (kph), and meters per second (m/s). 
+The format for the function is VeloConvert(select input unit("mph","kph", or"m/s"), select output unit("mph","kph", or"m/s"), velocity as integer)
+
+```{r}
+VeloConvert = function(veloIn, veloOut, velo){
+  if (veloIn == "mph"){
+    if (veloOut == "kph"){
+      velo2 = velo * 1.609344
+    }
+    else if (veloOut == "m/s"){
+      velo2 = velo * 0.447
+    }
+  }
+  else if (veloIn == "m/s"){
+    if (veloOut == "mph"){
+      velo2 = velo * 2.23694
+    }
+    else if (veloOut == "kph"){
+      velo2 = velo * 3.6
+    }
+  }
+  else if (veloIn == "kph"){
+    if (veloOut == "mph"){
+      velo2 = velo / 1.609344
+    }
+    else if (veloOut == "m/s"){
+      velo2 = velo * (5/18)
+    }
+  }
+  return(velo2)
+}
+```
+
+##Example
+```{r}
+VeloConvert("mph","kph",60)
+
+VeloConvert("m/s","mph", 122005)
+```
+
